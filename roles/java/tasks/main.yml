@@ -1,0 +1,4 @@
+- name: install the latest version of java
+  yum: name=java state=latest
+  sudo: True
+

@@ -1,0 +1,7 @@
+---
+- hosts: all
+  roles:
+    - {name: git, tags: git}
+    - {name: java, tags: java}
+    - {name: jenkins, tags: jenkins}
+

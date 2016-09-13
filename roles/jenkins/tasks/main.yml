@@ -1,0 +1,22 @@
+- name: download repo file
+  get_url:
+    url: http://pkg.jenkins-ci.org/redhat/jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo
+    mode: 0644
+  sudo: True
+
+- name: import rpm key for jenkins-ci
+  rpm_key: state=present key=https://jenkins-ci.org/redhat/jenkins-ci.org.key
+  sudo: True
+
+- name: install the latest version of jenkins
+  yum: name=jenkins state=latest
+  sudo: True
+
+- name: add config file
+  template: src=jenkins.j2 dest=/etc/sysconfig/jenkins owner=root mode=0600
+  sudo: True
+
+- name: start service
+  service: name=jenkins state=started
+  sudo: True
